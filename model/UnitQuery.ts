@@ -1,16 +1,26 @@
 import { Schema, model, models } from "mongoose"
 
+// UnitQuery-查询单元
 export type UnitQuery = {
+    // 主键
     _id: string
+    // 数据源
     source: SourceComp[]
+    // 过滤
     filter?: FilterComp[]
+    // 字段
     fields?: FieldComp[]
+    // 排序
     orders?: OrderComp[]
+    // 参数
     params?: ParamComp[]
+    // 分页
     page?: {
         pageNo: number,
         pageSize: number
     }
+    // 更新时间
+    updateAt: Date
 }
 
 type SourceComp = {
@@ -128,7 +138,8 @@ const UnitQuerySchema = new Schema<UnitQuery>({
     page: {
         pageNo: { type: Number, required: false },
         pageSize: { type: Number, required: false }
-    }
+    },
+    updateAt: { type: Date, default: Date.now }
 })
 
 const OneQueryModel = models.cores || model("cores", UnitQuerySchema)
