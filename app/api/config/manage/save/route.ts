@@ -13,8 +13,10 @@ function genId() {
 export async function GET(req: NextRequest) {
     try {
         await connect()
+        const id = genId()
         const one = new OneQueryModel({
-            _id: genId(),
+            _id: id,
+            apiId: id,
             source: [
                 {
                     src: {
@@ -25,10 +27,16 @@ export async function GET(req: NextRequest) {
                     role: "main"
                 }
             ],
-            // page: {
-            //     pageNo: 1,
-            //     pageSize: 10
-            // }
+            orders: [
+                {
+                    name: "id",
+                    type: "asc"
+                }
+            ],
+            page: {
+                pageNo: 1,
+                pageSize: 10
+            }
         })
         await one.save()
         return NextResponse.json({
