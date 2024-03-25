@@ -1,3 +1,4 @@
+import updateTimePlugin from "@/utils/mongoosePlugin/UpdateTimePlug"
 import { Schema, model, models } from "mongoose"
 
 // UnitQuery-查询单元
@@ -153,6 +154,9 @@ const UnitPageSchema = new Schema({
     pageSize: { type: Number, required: false }
 })
 
+/**
+ * 主体Schema
+ */
 const UnitQuerySchema = new Schema<UnitQuery>({
     _id: String,
     apiId: { type: String, required: true },
@@ -193,7 +197,11 @@ const UnitQuerySchema = new Schema<UnitQuery>({
     },
     updateAt: { type: Date, default: Date.now }
 })
+UnitQuerySchema.plugin(updateTimePlugin)
 
+/**
+ * 主体模型
+ */
 const OneQueryModel = models.cores || model("cores", UnitQuerySchema)
 
 export default OneQueryModel
