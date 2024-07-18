@@ -4,7 +4,7 @@ import { Schema, model, models } from "mongoose"
 // UnitQuery-查询单元
 export type UnitQuery = {
     // 主键
-    _id: string
+    // _id: string
     apiId: string
     // 数据源
     source: SourceComp[]
@@ -157,7 +157,7 @@ const UnitPageSchema = new Schema({
 /**
  * 主体Schema
  */
-const UnitQuerySchema = new Schema<UnitQuery>({
+const UnitQuerySchema = new Schema({
     _id: String,
     apiId: { type: String, required: true },
     source: {
